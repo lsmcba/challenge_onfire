@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  backend_service: 
+    container_name: backend_pokemon
+    image: python
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - net_pokemon
+
+  frontend_service:
+    container_name: frontend_pokemon
+    image: nodejs
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile 
+    ports: 
+      - "3000:3000"
+    networks:
+      - net_pokemon
+
+  
+networks:
+  net_pokemon:
+    driver: bridge
